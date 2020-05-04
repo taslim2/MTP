@@ -24,7 +24,8 @@
 
                             <div class="col-md-6 col-sm-6">
                                 <label for="name">Hospital</label><br>
-                                <select name="hospital_id" id="name">
+                                <select name="hospital_id" id="name" class="form-control">
+                                    <option>Select hospital</option>
                                     @foreach($hospitals as $hospital)
                                         <option value="{{ $hospital->id }}" {{ $hospital->id == $hospitaltest->hospital_id ? 'selected="selected"' : '' }}>{{ $hospital->name }}</option>
                                     @endforeach
@@ -33,7 +34,8 @@
 
                             <div class="col-md-6 col-sm-6">
                                 <label for="name">Test name</label><br>
-                                <select name="test_id" id="name">
+                                <select name="test_id" id="name" class="form-control">
+                                    <option>Select test</option>
                                     @foreach($tests as $test)
                                         <option value="{{ $test->id }}" {{ $test->id == $hospitaltest->test_id ? 'selected="selected"' : '' }}>{{ $test->name }}</option>
                                     @endforeach

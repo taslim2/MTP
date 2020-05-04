@@ -11,6 +11,11 @@ class HealthtipsController extends Controller
     {
         return view('user/logged/healthtips');
     }
+
+    public function indexl()
+    {
+        return view('user/logout/healthtips');
+    }
     /**
      * Show the form for creating a new resource.
      *

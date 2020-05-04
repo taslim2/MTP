@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client\Logged;
 
 use App\Appoinment;
 use App\Hospital;
+use App\HospitalTest;
 use App\Http\Controllers\Controller;
 use App\Requested;
 use App\Test;
@@ -33,31 +34,13 @@ class AppoinmentController extends Controller
     {
 
         $data['user'] = auth()->user();
-        //$data['hospitals'] = DB::table('hospital_tests')->groupBy('hospital_id')->get();
         $data['hospitals'] = Hospital::all();
-        //$data['tests'] = Test::all();
-        //dd($data);
 
         return view('user/logged/appoinmnet/create',$data);
 
     }
 
-    function fetch(Request $request)
-    {
-        $select = $request->get('select');
-        $value = $request->get('value');
-        $dependent = $request->get('dependent');
-        $data = DB::table('hospital_tests')
-                ->where($select ,$value)
-                ->groupBy($dependent)
-                ->get();
-        $output = '<option value="">Select '.ucfirst($dependent).'</option>';
-        foreach ($data as $row)
-        {
-            $output .= '<option value="'.$row->$dependent.'">'.$row->$dependent.'</option>';
-        }
-        echo $output;
-    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -67,7 +50,30 @@ class AppoinmentController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        $request->validate([
+            'name' => 'required',
+            'address' => 'required',
+            'hospital_id' => 'required',
+            'phone' => 'required',
+            'date' => 'required'
+        ]);
+
+        //dd($request->all());
+        $appoinment['user_id'] = auth()->user()->id;
+        $appoinment['name'] = $request->name;
+        $appoinment['address'] = $request->address;
+        $appoinment['hospital_id'] = $request->hospital_id;
+        $appoinment['phone'] = $request->phone;
+        $appoinment['date'] = $request->date;
+        $appoinment['status'] = "pending";
+
+        $hospital_id = $appoinment['hospital_id'];
+        $data['hospital'] = Hospital::findorfail($hospital_id);
+        $data['tests'] = HospitalTest::all()->where('hospital_id',$hospital_id);
+        Appoinment::create($appoinment);
+        $data['appoinmen_id'] = Appoinment::latest()->first()->id;
+        //dd($data['appoinmen_id']);
+        return view('user/logged/appoinmnet/appoinmenttest',$data);
     }
 
     /**

@@ -13,7 +13,7 @@
 
             <div class="col-md-8 col-sm-6">
                 <div class="footer-thumb">
-                    <p><h2><a href="test/add" >Add new Test</a></h2></p> <!--target="_blank" for open in new tab-->
+                    <p><h2><a  style="color: #dd4b39" href="test/add" >Add new Test</a></h2></p> <!--target="_blank" for open in new tab-->
                     <h4 class="wow fadeInUp" data-wow-delay="0.4s">Available Test List</h4>
                     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
                     <table class="w3-table-all w3-hoverable">

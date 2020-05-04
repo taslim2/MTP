@@ -22,10 +22,13 @@
                             <div class="col-md-6 col-sm-6">
                                 <label for="name">Test Name</label>
                                 <input type="text" class="form-control" id="name" name="testname" placeholder="Test Name">
+                                @error('testname')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="col-md-12 col-sm-12">
-                                <button type="submit" class="form-control" id="cf-submit" name="submit">Save</button>
+                                <button type="submit" class="form-control" id="cf-submit" >Save</button>
                             </div>
                         </div>
                     </form>

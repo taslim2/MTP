@@ -15,4 +15,9 @@ class HospitalTest extends Model
         return $this->belongsTo(Test::class);
     }
 
+    public function hospital()
+    {
+        return $this->belongsTo(Hospital::class);
+    }
+
 }

@@ -11,10 +11,10 @@
                         <div class="col-md-5 col-sm-5">
                             <div class="footer-thumb">
                                 <h4 class="wow fadeInUp" data-wow-delay="0.4s">Contact Info</h4>
-                                <p>Fusce at libero iaculis, venenatis augue quis, pharetra lorem. Curabitur ut dolor eu elit consequat ultricies.</p>
+                                <p>Our office is in Shymoly, Dhaka, Bangladesh</p>
 
                                 <div class="contact-info">
-                                    <p><i class="fa fa-phone"></i> 010-070-0170</p>
+                                    <p><i class="fa fa-phone"></i> +8801623-164077</p>
                                     <p><i class="fa fa-envelope-o"></i> <a href="#">info@company.com</a></p>
                                 </div>
                             </div>

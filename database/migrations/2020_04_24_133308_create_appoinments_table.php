@@ -18,16 +18,14 @@ class CreateAppoinmentsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('name');
             $table->string('address');
-            $table->date('date');
             $table->unsignedBigInteger('hospital_id');
-            $table->unsignedBigInteger('test_id');
-            $table->double('cost');
             $table->string('phone');
+            $table->date('date');
             $table->string('status')->nullable();
+            $table->string('data')->default("no");
             $table->string('prescription')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('hospital_id')->references('id')->on('hospitals');
-            $table->foreign('test_id')->references('id')->on('tests');
             $table->timestamps();
         });
     }

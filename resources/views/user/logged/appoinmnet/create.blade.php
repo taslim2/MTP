@@ -1,13 +1,12 @@
 @extends('layout.user.logged.master')
 @section('content')
 
-
     <section id="appointment" data-stellar-background-ratio="3">
         <div class="container">
             <div class="row">
 
                 <div class="col-md-6 col-sm-6">
-                    <img src="images/appointment-image.jpg" class="img-responsive" alt="">
+                    <img src="{{ asset('images/appointment-image.jpg') }}" class="img-responsive" alt="">
                 </div>
 
                 <div class="col-md-6 col-sm-6">
@@ -21,53 +20,52 @@
 
                         <div class="wow fadeInUp" data-wow-delay="0.8s">
                             <div class="col-md-6 col-sm-6">
-                                <label for="name">Name</label>
+                                <label for="name">Name (* Changeable)</label>
                                 <input type="text" class="form-control" id="name" value="{{ $user->name }}" name="name" placeholder="Full Name">
+                                @error('name')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="col-md-6 col-sm-6">
-                                <label for="name">Address</label>
+                                <label for="name">Address (* Changeable)</label>
                                 <input type="text" class="form-control" id="address" value="{{ $user->address }}" name="address" placeholder="Patient address">
+                                @error('address')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="col-md-6 col-sm-6">
                                 <label for="date">Select Date</label>
                                 <input type="date" name="date" value="" class="form-control">
+                                @error('date')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
-                            <div class="col-md-12 col-sm-12">
-                                <label for="select">Select Hospital</label>
-                                <select class="form-control input-lg dynamic" data-dependent="tets" name="hospital">
+                            <div class="col-md-6 col-sm-6">
+                                <label for="select" class="control-label">Select Hospital</label>
+                                <select class="form-control"  name="hospital_id" id="hospital_id">
                                     <option value="">Select Hospital</option>
-
                                     @foreach($hospitals as $hospital)
                                     <option value="{{ $hospital->id }}">{{ $hospital->name }}</option>
                                     @endforeach
 
                                 </select>
-                            </div>
-
-                            <div class="col-md-6 col-sm-6">
-                                <label for="select">Select Test</label>
-                                <select class="form-control input-lg dynamic" data-dependent="cost" name="tets" id="tets">
-                                        <option value="">Select Test</option>
-                                </select>
-                            </div>
-
-
-
-                            <div class="col-md-6 col-sm-6">
-                                <label for="select">Cost</label><br>
-                                <input type="number" class="form-control" readonly name="cost" id="cost">
+                                @error('hospital_id')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="col-md-12 col-sm-12">
-                                <label for="telephone">Phone Number</label>
+                                <label for="telephone">Phone Number (* Changeable)</label>
                                 <input type="tel" class="form-control" id="phone" value="{{ $user->phone }}" name="phone" placeholder="Phone">
-                                <label for="prescription">Add prescription</label>
-                                <input type="file" name="prescription">
-                                <button type="submit" class="form-control" id="cf-submit">Submit request</button>
+                                @error('phone')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                                <button type="submit" class="form-control" id="cf-submit">Next</button>
                             </div>
+
                         </div>
                     </form>
                 </div>
@@ -75,29 +73,6 @@
             </div>
         </div>
     </section>
-
-    <script>
-        $(document).ready(function () {
-            $('.dynamic').change(function () {
-                if ($(this).val() != '')
-                {
-                    var select = $(this).attr("id");
-                    var value = $(this).val();
-                    var dependent = $(this).data('dependent');
-                    var _token = $('input[name="_token"]').val();
-
-                    $.ajax({
-                        url:"{{ route('appoinmentcontroller.fetch') }}",
-                        method:"POST",
-                        data:{select:select, value:value, _token:_token, dependent:dependent},
-                        success:function (result) {
-                            $('#'+dependent).html(result);
-                        }
-                    })
-                }
-            })
-        })
-    </script>
 
 @endsection
 @section('title','Medical Test Partner')

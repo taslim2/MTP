@@ -10,4 +10,9 @@ class ContractusController extends Controller
     {
         return view('user/logged/contractus');
     }
+
+    public function indexl()
+    {
+        return view('user/logout/contractus');
+    }
 }

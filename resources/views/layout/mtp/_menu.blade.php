@@ -9,7 +9,7 @@
             </button>
 
             <!-- lOGO TEXT HERE -->
-            <a href="{{ url('dashboard') }}" class="navbar-brand">MTP</a>
+            <a href="{{ url('mtphome') }}" class="navbar-brand">MTP</a>
         </div>
 
         <!-- MENU LINKS -->
@@ -19,7 +19,12 @@
                 <li><a href="{{ url('clientrequests') }}" class="smoothScroll">Requested services</a></li>
                 <li><a href="{{ url('tests') }}" class="smoothScroll">Tests</a></li>
                 <li><a href="{{ url('hospitals') }}" class="smoothScroll">Hospitals</a></li>
-                <li><a href="{{ url('home') }}" class="smoothScroll">Logout</a></li>
+                <li class="appointment-btn">
+                    <form action="{{ url('home') }}" method="post">
+                        @csrf
+                        <button style="background-color: red;border: none; color: white; padding: 12px 32px;border-radius: 3px;">Logout</button>
+                    </form>
+                </li>
             </ul>
         </div>
 

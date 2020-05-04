@@ -24,26 +24,37 @@
 
                             <div class="col-md-6 col-sm-6">
                                 <label for="name">Hospital</label><br>
-                                <select name="hospital_id" id="name">
+                                <select name="hospital_id" id="name" class="form-control">
+                                    <option value="">Select hospital</option>
                                     @foreach($hospitals as $hospital)
                                         <option value="{{ $hospital->id }}">{{ $hospital->name }}</option>
                                     @endforeach
                                 </select>
+                                @error('hospital_id')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="col-md-6 col-sm-6">
                                 <label for="name">Test name</label><br>
-                                <select name="test_id" id="name">
+                                <select name="test_id" id="name" class="form-control">
+                                    <option value="">Select test</option>
                                     @foreach($tests as $test)
                                         <option value="{{ $test->id }}">{{ $test->name }}</option>
                                     @endforeach
                                 </select>
+                                @error('test_id')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="col-md-12 col-sm-12">
                                 <br>
                                 <label for="cost">Cost</label>
                                 <input type="number" class="form-control" id="cost" name="cost" placeholder="Test cost">
+                                @error('cost')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                                 <button type="submit" class="form-control" id="cf-submit" >Save</button>
                             </div>
                         </div>

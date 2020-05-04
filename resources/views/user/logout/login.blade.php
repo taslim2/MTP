@@ -6,7 +6,7 @@
 
 </head>
 <body>
-
+<title>Login</title>
 <br><br><br>
 <div class="div" >
 
@@ -23,6 +23,10 @@
             <input type="password" placeholder="Enter Password" name="password" required>
 
             <a href="{{ url('client/register') }}">Not registred?</a>
+            <br><br>
+            <a href="{{ url('mtp') }}">Admin login?</a>
+            <br><br>
+            <a href="{{ url('home') }}">Back to home</a>
             <button type="submit">Login</button>
 
         </div>

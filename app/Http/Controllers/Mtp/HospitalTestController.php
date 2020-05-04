@@ -7,6 +7,8 @@ use App\HospitalTest;
 use App\Http\Controllers\Controller;
 use App\Test;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 class HospitalTestController extends Controller
@@ -45,12 +47,35 @@ class HospitalTestController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'hospital_id' => 'required',
+            'test_id' => 'required',
+            'cost' => 'required'
+        ]);
+
+        $hospital_id = $request->hospital_id;
+        $test_id = $request->test_id;
+        $number = DB::table('hospital_tests')->count('id');
+        $valid = DB::select('select hospital_id,test_id from hospital_tests');
+
+        $print = json_decode(json_encode($valid),true);
+
+        for ($i=0;$i<$number;$i++)
+        {
+
+            if ($hospital_id == $print[$i]['hospital_id'] && $test_id == $print[$i]['test_id'])
+            {
+                Alert::error('Duplicate record!', 'This record alerady exist');
+                return redirect('hospitaltest/add');
+            }
+        }
+
         $data['hospital_id'] = $request->hospital_id;
         $data['test_id'] = $request->test_id;
         $data['cost'] = $request->cost;
         // $id = $request->hospital_id;
         HospitalTest::create($data);
-        return redirect('hospitals');//to make it work i need to use route!
+        return redirect('hospitals')->with('success','Test added successfully');//to make it work i need to use route!
     }
 
     /**
@@ -85,9 +110,14 @@ class HospitalTestController extends Controller
      * @param  \App\HospitalTest  $hospitalTest
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, HospitalTest $hospitalTest)
+    public function update(Request $request, HospitalTest $hospitalTest,$id)
     {
-        //
+        $data['hospital_id'] = $request->hospital_id;
+        $data['test_id'] = $request->test_id;
+        $data['cost'] = $request->cost;
+        //dd($data);
+        HospitalTest::findorfail($id)->update($data);
+        return redirect('hospitals')->with('success','Updated successfully');
     }
 
     /**
@@ -99,6 +129,6 @@ class HospitalTestController extends Controller
     public function destroy(HospitalTest $hospitalTest,$id)
     {
         HospitalTest::findorfail($id)->delete();
-        return redirect('hospitals');
+        return redirect('hospitals')->with('success','Deleteds');
     }
 }

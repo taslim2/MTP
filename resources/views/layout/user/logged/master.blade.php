@@ -23,11 +23,11 @@
 @include('layout.user.logged._menu')
 
 @yield('content')
-
+@include('sweetalert::alert')
 <!-- FOOTER -->
 @include('layout.user.logged._footer')
 <!-- SCRIPTS -->
 @include('layout.user.logged._js')
-
+@yield('jquery')
 </body>
 </html>

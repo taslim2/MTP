@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Mtp;
 use App\Http\Controllers\Controller;
 use App\Test;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class TestController extends Controller
 {
@@ -32,9 +34,30 @@ class TestController extends Controller
      */
     public function store(Request $request)
     {
+       // dd($request->all());
+        $request->validate([
+            'testname' => 'required'
+        ]);
+
+        $test = $request->testname;
+        $number = DB::table('tests')->count('id');
+        $valid = DB::select('select name from tests');
+
+        $print = json_decode(json_encode($valid),true);
+
+        for ($i=0;$i<$number;$i++)
+        {
+
+            if ($test == $print[$i]['name'])
+            {
+                Alert::error('Duplicate test!', 'Test alerady exist');
+                return redirect('test/add');
+            }
+        }
+
         $data['name'] = $request->testname;
         Test::create($data);
-        return redirect('tests');
+        return redirect('tests')->with('success','Test is added');
     }
 
     /**
@@ -71,7 +94,7 @@ class TestController extends Controller
     {
         $data['name'] = $request->testname;
         Test::findorFail($id)->update($data);
-        return redirect('tests');
+        return redirect('tests')->with('success','Test is updated');
     }
 
     /**
@@ -83,6 +106,6 @@ class TestController extends Controller
     public function destroy(Test $test,$id)
     {
         Test::findorFail($id)->delete();
-        return redirect('tests');
+        return redirect('tests')->with('success','Test is deleted');
     }
 }

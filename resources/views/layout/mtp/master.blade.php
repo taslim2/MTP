@@ -16,12 +16,11 @@
 
 <!-- MENU -->
 @include('layout.mtp._menu')
-
 @yield('content')
 
 
 <!-- SCRIPTS -->
 @include('layout.user.logged._js')
-
+@include('sweetalert::alert')
 </body>
 </html>
