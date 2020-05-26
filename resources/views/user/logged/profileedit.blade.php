@@ -22,21 +22,33 @@
                             <div class="col-md-6 col-sm-6">
                                 <label for="name">Name</label>
                                 <input type="text" class="form-control" id="name" value="{{ $user->name }}" name="name" placeholder="Full Name">
+                                @error('name')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="col-md-6 col-sm-6">
                                 <label for="name">Address</label>
                                 <input type="text" class="form-control" id="address" value="{{ $user->address }}" name="address" placeholder="Patient address">
+                                @error('address')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="col-md-12 col-sm-12">
                                 <label for="telephone">Phone Number</label>
                                 <input type="tel" class="form-control" id="phone" value="{{ $user->phone }}" name="phone" placeholder="Phone">
+                                @error('phone')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="col-md-12 col-sm-12">
                                 <label for="email">Email</label>
                                 <input type="email" class="form-control" id="email" value="{{ $user->email }}" name="email" placeholder="Eail">
+                                @error('email')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="col-md-12 col-sm-12">

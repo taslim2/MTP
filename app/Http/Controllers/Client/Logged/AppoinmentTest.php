@@ -38,4 +38,11 @@ class AppoinmentTest extends Controller
 
     }
 
+    public function destroy($id)
+    {
+        Appoinment::findorfail($id)->delete();
+        return redirect('requested');
+
+    }
+
 }

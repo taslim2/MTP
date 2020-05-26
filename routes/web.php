@@ -16,8 +16,8 @@ use RealRashid\SweetAlert\Facades\Alert;
 */
 
 Route::get('/', function () {
-    Alert::success('Success Title', 'Success Message');
-    return view('welcome');
+    Alert::success('Welcome');
+    return view('user/logout/dashboard');
 });
 //Route::post('test','Client\Logged\AppoinmentTest@test');
 //login

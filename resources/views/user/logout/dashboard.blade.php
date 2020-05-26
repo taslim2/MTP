@@ -18,5 +18,5 @@
         </div>
     </section>
 @endsection
-@section('title','Welcome to a Professional Health Care')
-@section('ptitle','Health - Medical Website Template')
+@section('title','Welcome to MTP')
+@section('ptitle','MTP- Home page')

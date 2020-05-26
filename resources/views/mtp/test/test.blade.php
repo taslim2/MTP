@@ -29,7 +29,6 @@
                             <td>{{ $test->name }}</td>
                             <td>
                                 <form action="{{ url('test/destroy',$test->id) }}" method="post">
-                                    @method('_delete')
                                     @csrf
                                     <button>Delete</button>
                                 </form>

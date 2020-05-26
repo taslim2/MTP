@@ -39,8 +39,6 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-
-
         $request->validate([
             'name' => 'required',
             'address' => 'required',
@@ -48,7 +46,6 @@ class ClientController extends Controller
             'email' => 'required',
             'password' => 'required',
         ]);
-
         $email = $request->email;
         $number = DB::table('users')->count('id');
         $valid = DB::select('select email from users');
@@ -73,7 +70,8 @@ class ClientController extends Controller
         $data['role'] = "client";
 
         User::create($data);
-        return redirect('login');
+        Alert::success('Registration successful');
+        return redirect('client/register');
 
     }
 
@@ -109,6 +107,14 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required',
+            'address' => 'required',
+            'phone' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+
         $data['name'] = $request->name;
         $data['address'] = $request->address;
         $data{'phone'} = $request->phone;
